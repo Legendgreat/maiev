@@ -1,0 +1,112 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+@include mat.strong-focus-indicators();
+
+// Define the theme object.
+$dark-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: (
+      brand-family: "Montserrat",
+      plain-family: "Roboto",
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+$light-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: (
+      brand-family: "Montserrat",
+      plain-family: "Roboto",
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  @include mat.all-component-themes($dark-theme);
+  @include mat.strong-focus-indicators-theme($dark-theme);
+
+  @media (prefers-color-scheme: light) {
+    @include mat.all-component-themes($light-theme);
+    @include mat.strong-focus-indicators-theme($light-theme);
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.primary-icon {
+  @include mat.icon-color($dark-theme, $color-variant: primary);
+}
+
+.mat-icon.icon-size-lg {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+}
+
+.mat-icon.icon-size-xl {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+}
+
+.mat-mdc-snack-bar-container {
+  text-align: center;
+}
+
+simple-snack-bar {
+  display: inline-block !important;
+}
+
+.text-dim {
+  color: mat.get-theme-color($dark-theme, neutral, 60);
+
+  @media (prefers-color-scheme: light) {
+    color: mat.get-theme-color($light-theme, neutral, 40);
+  }
+}
+
+.success .mat-mdc-snackbar-surface {
+  background-color: rgb(134 239 172) !important;
+}
