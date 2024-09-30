@@ -9,6 +9,20 @@ const DUMMY_SECRETS: Secret[] = [
     secret: 'secret_1',
     type: Types.LOGIN,
   },
+  {
+    id: 1,
+    label: 'Dummy Secret 2',
+    login: 'username_2',
+    secret: 'secret_2',
+    type: Types.LOGIN,
+  },
+  {
+    id: 2,
+    label: 'Dummy Secret 3',
+    login: 'username_3',
+    secret: 'secret_3',
+    type: Types.LOGIN,
+  },
 ];
 
 export default DUMMY_SECRETS;

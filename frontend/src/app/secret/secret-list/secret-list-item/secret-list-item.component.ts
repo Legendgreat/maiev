@@ -17,6 +17,14 @@ export class SecretListItemComponent {
 
   private _snackBar = inject(MatSnackBar);
 
+  pointerDownHandler() {
+    console.log()
+  }
+
+  pointerUpHandler() {
+    console.log()
+  }
+
   copyToClipboard() {
     navigator.clipboard.writeText(this.secret.secret);
     this.openSnackBar('Secret copied to clipboard.');
