@@ -1,0 +1,31 @@
+<div class="flex justify-center items-center h-screen">
+  <mat-card class="flex w-1/2 h-min">
+    <mat-card-content>
+      <div class="flex flex-col">
+        <mat-form-field>
+          <mat-label>Username / Email</mat-label>
+          <input matInput required [(ngModel)]="identifier" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            required
+            [type]="hide() ? 'password' : 'text'"
+            [(ngModel)]="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="clickEvent($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide()"
+          >
+            <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+        <button (click)="loginEvent($event)" mat-flat-button>Log in</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
