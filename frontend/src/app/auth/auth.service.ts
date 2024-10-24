@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +15,12 @@ export class AuthService {
     return !helper.isTokenExpired(token);
   }
 
-  public authenticate(identifier: string, pw: string) {
+  public authenticate(identifier: string, pw: string): boolean {
     localStorage.setItem(
       'token',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
     );
 
-    return true;
+    return localStorage.getItem('token') ? true : false;
   }
 }

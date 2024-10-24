@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
@@ -22,15 +23,23 @@ import { AuthService } from '../auth/auth.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  constructor(private authService: AuthService) {}
-
   identifier = '';
   password = '';
-
   hide = signal(true);
+  returnUrl: string;
+
+  constructor(
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
 
   loginEvent(event: MouseEvent) {
+    console.log(this.router);
     this.authService.authenticate(this.identifier, this.password);
+    this.router.navigateByUrl(this.returnUrl);
   }
 
   clickEvent(event: MouseEvent) {

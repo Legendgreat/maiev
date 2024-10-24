@@ -16,9 +16,11 @@ export class AuthGuardService {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    console.log('route-access', state);
-    if (!this.auth.isAuthenticated()) {
-      this.router.navigate(['login']);
+    const auth = this.auth.isAuthenticated();
+    if (!auth) {
+      this.router.navigate(['login'], {
+        queryParams: { returnUrl: state.url },
+      });
       return false;
     }
     return true;
