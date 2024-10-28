@@ -29,9 +29,9 @@ export class AuthService {
 
   public login(identifier: string, password: string) {
     console.log('Login function called.');
-    this.http
+    return this.http
       .post<{ access_token: string }>('/login', { identifier, password })
-      .pipe(tap((res) => this.setSession));
+      .pipe(tap((res) => this.setSession(res)));
   }
 
   private setSession(res: { access_token: string }) {
@@ -39,18 +39,21 @@ export class AuthService {
     const { exp } = this.helper.decodeToken<UserToken>(access_token)!;
     const expiresAt = moment().add(exp, `s`);
 
-    console.log(
-      `Setting token to ${access_token}\nSetting expires_at to ${JSON.stringify(
-        expiresAt.valueOf()
-      )}`
-    );
-
     localStorage.setItem('token', access_token);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }
 
+  public logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expires_at');
+  }
+
+  public getAuthedUser(): Partial<User> | null {
+    return this.helper.decodeToken(this.getAuthToken()!);
+  }
+
   public getAuthToken(): string | null {
-    const token = localStorage.getItem('id_token');
+    const token = localStorage.getItem('token');
     return token;
   }
 }
