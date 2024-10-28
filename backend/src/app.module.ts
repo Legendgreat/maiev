@@ -1,12 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
-import { SecretsModule } from './secrets/secrets.module';
+import { UserModule } from './resources/users/user.module';
+import { SecretsModule } from './resources/secrets/secrets.module';
+import { GroupsModule } from './groups/groups.module';
+import { GroupRolesModule } from './resources/group-roles/group-roles.module';
 
 @Module({
-  imports: [UserModule, SecretsModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [UserModule, SecretsModule, GroupsModule, GroupRolesModule],
 })
 export class AppModule {}

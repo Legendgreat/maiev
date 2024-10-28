@@ -12,7 +12,6 @@ async function bootstrap() {
     .setTitle('Maiev: Warden of Secrets')
     .setDescription('This page describes the full set of API functions.')
     .setVersion('1.0')
-    .addTag('times')
     .addBearerAuth()
     .addGlobalParameters()
     .build();
