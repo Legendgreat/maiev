@@ -1,7 +1,6 @@
 import { Column } from 'typeorm';
-import { SecretData } from './secret.entity';
 
-export class Login extends SecretData {
+export class Login {
   @Column({ nullable: true })
   website: string;
 

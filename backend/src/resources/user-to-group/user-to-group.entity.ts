@@ -1,8 +1,9 @@
-import { Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from '../users/entities/user.entity';
 import { Group } from '../groups/entities/group.entity';
-import { GroupRole } from '../group-roles/entities/group-role.entity';
+import { GroupRole } from './groupRole';
 
+@Entity()
 export class UserToGroup {
   @PrimaryGeneratedColumn()
   id: number;

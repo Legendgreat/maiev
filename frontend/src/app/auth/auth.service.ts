@@ -1,26 +1,56 @@
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable } from 'rxjs';
+import { Observable, shareReplay, tap } from 'rxjs';
+import { AUTHENTICATED } from './auth.interceptor';
+import moment from 'moment';
+import { User } from '../user/user.interface';
+
+interface UserToken extends Partial<User> {
+  iat: number;
+  exp: number;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor() {}
+  private helper;
+
+  constructor(private http: HttpClient) {
+    this.helper = new JwtHelperService();
+  }
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
-    const helper = new JwtHelperService();
 
-    return !helper.isTokenExpired(token);
+    return !this.helper.isTokenExpired(token);
   }
 
-  public authenticate(identifier: string, pw: string): boolean {
-    localStorage.setItem(
-      'token',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+  public login(identifier: string, password: string) {
+    console.log('Login function called.');
+    this.http
+      .post<{ access_token: string }>('/login', { identifier, password })
+      .pipe(tap((res) => this.setSession));
+  }
+
+  private setSession(res: { access_token: string }) {
+    const { access_token } = res;
+    const { exp } = this.helper.decodeToken<UserToken>(access_token)!;
+    const expiresAt = moment().add(exp, `s`);
+
+    console.log(
+      `Setting token to ${access_token}\nSetting expires_at to ${JSON.stringify(
+        expiresAt.valueOf()
+      )}`
     );
 
-    return localStorage.getItem('token') ? true : false;
+    localStorage.setItem('token', access_token);
+    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+  }
+
+  public getAuthToken(): string | null {
+    const token = localStorage.getItem('id_token');
+    return token;
   }
 }

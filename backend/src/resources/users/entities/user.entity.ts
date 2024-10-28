@@ -1,9 +1,10 @@
 import { Base } from 'src/global/entities/base.entity';
 import { Role } from 'src/guards/roles/role.enum';
-import { Group } from 'src/resources/groups/entities/group.entity';
 import { Secret } from 'src/resources/secrets/entities/secret.entity';
-import { Column, JoinColumn, JoinTable, ManyToMany, OneToMany } from 'typeorm';
+import { UserToGroup } from 'src/resources/user-to-group/user-to-group.entity';
+import { Column, Entity, JoinColumn, OneToMany } from 'typeorm';
 
+@Entity()
 export class User extends Base {
   @Column()
   username: string;
@@ -33,7 +34,8 @@ export class User extends Base {
   @JoinColumn()
   secrets?: Secret[];
 
-  @ManyToMany(() => Group, (group) => group.members, { nullable: true })
-  @JoinTable()
-  groups: Group[];
+  @OneToMany(() => UserToGroup, (userToGroup) => userToGroup.user, {
+    nullable: true,
+  })
+  userToGroups: UserToGroup[];
 }

@@ -1,4 +1,4 @@
-import { Secret } from '../types/SecretType';
+import { Secret } from '../interfaces/secret.interface';
 import Types from './SecretEnums';
 
 const DUMMY_SECRETS: Secret[] = [

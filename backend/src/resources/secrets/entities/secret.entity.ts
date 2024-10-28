@@ -1,7 +1,7 @@
 import { Base } from 'src/global/entities/base.entity';
 import { Group } from 'src/resources/groups/entities/group.entity';
 import { User } from 'src/resources/users/entities/user.entity';
-import { Column, DeleteDateColumn, ManyToOne } from 'typeorm';
+import { Column, DeleteDateColumn, Entity, ManyToOne } from 'typeorm';
 import { Creditcard } from './creditcard.entity';
 import { Login } from './login.entity';
 
@@ -10,6 +10,7 @@ export enum SecretType {
   Creditcard = 'creditcard',
 }
 
+@Entity()
 export class Secret extends Base {
   @Column()
   name: string;
@@ -23,8 +24,8 @@ export class Secret extends Base {
   @Column()
   type: SecretType;
 
-  @Column()
-  data: Login | Creditcard;
+  @Column('json')
+  data: string;
 
   @ManyToOne(() => User, (user) => user.secrets, { nullable: true })
   user?: User;

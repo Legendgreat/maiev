@@ -1,12 +1,15 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm'
-import { config } from 'dotenv'
-import { DataSourceOptions } from 'typeorm'
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { config } from 'dotenv';
+import { DataSourceOptions } from 'typeorm';
 
-config()
+config();
 
 export const options: DataSourceOptions & TypeOrmModuleOptions = {
-  type: 'better-sqlite3',
-  database: 'db.sqlite',
+  type: 'postgres',
+  port: +process.env.DB_PORT,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_DB,
   autoLoadEntities: true,
   synchronize: true,
-}
+};

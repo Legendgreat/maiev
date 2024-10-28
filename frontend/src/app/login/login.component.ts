@@ -37,8 +37,7 @@ export class LoginComponent {
   }
 
   loginEvent(event: MouseEvent) {
-    console.log(this.router);
-    this.authService.authenticate(this.identifier, this.password);
+    this.authService.login(this.identifier, this.password);
     this.router.navigateByUrl(this.returnUrl);
   }
 

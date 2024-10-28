@@ -1,12 +1,11 @@
 import { Column } from 'typeorm';
-import { SecretData } from './secret.entity';
 
 export enum CreditcardType {
   Visa = 'visa',
   Mastercard = 'mastercard',
 }
 
-export class Creditcard extends SecretData {
+export class Creditcard {
   @Column({ nullable: true })
   cardholder: string;
 

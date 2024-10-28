@@ -1,7 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Secret } from '../../types/SecretType';
+import { Secret } from '../../interfaces/secret.interface';
 import { MatIcon } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 
@@ -18,11 +18,11 @@ export class SecretListItemComponent {
   private _snackBar = inject(MatSnackBar);
 
   pointerDownHandler() {
-    console.log()
+    console.log();
   }
 
   pointerUpHandler() {
-    console.log()
+    console.log();
   }
 
   copyToClipboard() {
