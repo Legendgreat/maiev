@@ -1,0 +1,29 @@
+<div>
+  <div #header>
+    <mat-nav-list>
+      @for (item of headerList; track item.id) {
+      <mat-list-item>
+        <app-sidenav-list-item mat-list-item [item]="item" />
+      </mat-list-item>
+      }
+    </mat-nav-list>
+  </div>
+  <div #body>
+    <mat-nav-list>
+      @for (item of bodyList; track item.id) {
+      <mat-list-item>
+        <app-sidenav-list-item mat-list-item [item]="item" />
+      </mat-list-item>
+      }
+    </mat-nav-list>
+  </div>
+  <div #footer>
+    <mat-nav-list>
+      @for (item of footerList; track item.id) {
+      <mat-list-item>
+        <app-sidenav-list-item mat-list-item [item]="item" />
+      </mat-list-item>
+      }
+    </mat-nav-list>
+  </div>
+</div>

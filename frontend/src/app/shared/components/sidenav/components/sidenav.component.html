@@ -1,5 +1,7 @@
 <mat-sidenav-container>
-  <mat-sidenav [opened]="isOpened()" [mode]="'side'"></mat-sidenav>
+  <mat-sidenav [opened]="isOpened()" [mode]="'side'">
+    <app-sidenav-list />
+  </mat-sidenav>
   <mat-sidenav-content>
     <ng-content></ng-content>
   </mat-sidenav-content>
