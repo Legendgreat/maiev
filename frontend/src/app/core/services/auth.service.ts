@@ -5,6 +5,7 @@ import { Observable, shareReplay, tap } from 'rxjs';
 import { AUTHENTICATED } from '../interceptors/auth.interceptor';
 import moment from 'moment';
 import { User } from '../../modules/user/user.interface';
+import { Router, RouterStateSnapshot } from '@angular/router';
 
 interface UserToken extends Partial<User> {
   iat: number;
@@ -17,7 +18,7 @@ interface UserToken extends Partial<User> {
 export class AuthService {
   private helper;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.helper = new JwtHelperService();
   }
 
@@ -46,6 +47,11 @@ export class AuthService {
   public logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('expires_at');
+
+    const returnUrl = this.router.routerState.snapshot.url;
+    this.router.navigate(['login'], {
+      queryParams: { returnUrl },
+    });
   }
 
   public getAuthedUser(): Partial<User> | null {

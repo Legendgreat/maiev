@@ -1,29 +1,13 @@
-<div>
-  <div #header>
-    <mat-nav-list>
-      @for (item of headerList; track item.id) {
-      <mat-list-item>
-        <app-sidenav-list-item mat-list-item [item]="item" />
-      </mat-list-item>
-      }
-    </mat-nav-list>
-  </div>
-  <div #body>
-    <mat-nav-list>
-      @for (item of bodyList; track item.id) {
-      <mat-list-item>
-        <app-sidenav-list-item mat-list-item [item]="item" />
-      </mat-list-item>
-      }
-    </mat-nav-list>
-  </div>
-  <div #footer>
-    <mat-nav-list>
-      @for (item of footerList; track item.id) {
-      <mat-list-item>
-        <app-sidenav-list-item mat-list-item [item]="item" />
-      </mat-list-item>
-      }
-    </mat-nav-list>
-  </div>
-</div>
+<mat-nav-list *ngIf="list">
+  @for (item of list; track item.id) {
+  <a mat-list-item *ngIf="item.routerLink" [routerLink]="item.routerLink">
+    <mat-icon matListItemIcon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+    <span matListItemTitle>{{ item.label }}</span>
+  </a>
+  <a mat-list-item *ngIf="item.onClick" (click)="item.onClick()">
+    <mat-icon matListItemIcon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+    <span matListItemTitle>{{ item.label }}</span>
+  </a>
+  }
+</mat-nav-list>
+<mat-spinner *ngElse />

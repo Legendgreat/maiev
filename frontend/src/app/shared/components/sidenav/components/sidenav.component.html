@@ -1,8 +1,12 @@
-<mat-sidenav-container>
+<mat-sidenav-container class="h-full">
   <mat-sidenav [opened]="isOpened()" [mode]="'side'">
-    <app-sidenav-list />
+    <div class="flex flex-col h-full">
+      <app-sidenav-list [list]="headerList" />
+      <app-sidenav-list [list]="bodyList" class="grow" />
+      <app-sidenav-list [list]="footerList" />
+    </div>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content class="overflow-y-auto overflow-x-hidden">
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

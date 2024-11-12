@@ -59,19 +59,16 @@ $light-theme: mat.define-theme(
 }
 
 html,
-body {
+body,
+app-root {
   height: 100%;
 }
-body {
+body,
+app-root {
   margin: 0;
 }
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
+app-root {
+  display: block;
 }
 
 .primary-icon {
