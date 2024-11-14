@@ -4,7 +4,8 @@
   </button>
   <span class="select-none">Maiev: Warden of Secrets</span>
   <span class="spacer flex-auto"></span>
-  <button mat-icon-button>
-    <mat-icon>dark_mode</mat-icon>
+  <button mat-raised-button (click)="handleNewSecretClick()">
+    <mat-icon>add</mat-icon>
+    <span>New Secret</span>
   </button>
 </mat-toolbar>

@@ -1,15 +1,34 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateSecretDto } from './dto/create-secret.dto';
 import { UpdateSecretDto } from './dto/update-secret.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Secret } from './entities/secret.entity';
+import { Repository } from 'typeorm';
+import { REQUEST } from '@nestjs/core';
+import { IGetUserAuthInfoRequest } from 'src/guards/auth/auth.interface';
 
 @Injectable()
 export class SecretsService {
+  constructor(
+    @Inject(REQUEST)
+    private readonly request: IGetUserAuthInfoRequest,
+    @InjectRepository(Secret)
+    private secretRepository: Repository<Secret>,
+  ) {}
+
   create(createSecretDto: CreateSecretDto) {
     return 'This action adds a new secret';
   }
 
   findAll() {
-    return `This action returns all secrets`;
+    const { user } = this.request;
+
+    const secrets = this.secretRepository.find({
+      relations: { user: true },
+      where: { user },
+    });
+
+    return secrets;
   }
 
   findOne(id: number) {

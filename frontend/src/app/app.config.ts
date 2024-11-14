@@ -1,4 +1,8 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter, withRouterConfig } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -11,16 +15,26 @@ import {
 } from '@angular/common/http';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { apiInterceptor } from './core/interceptors/api.interceptor';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(
       withFetch(),
-      withInterceptors([apiInterceptor, authInterceptor])
+      withInterceptors([apiInterceptor, authInterceptor]),
     ),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withRouterConfig({ onSameUrlNavigation: 'reload' })),
     provideAnimationsAsync(),
-    provideAnimationsAsync(),
+    importProvidersFrom(
+      NgxSkeletonLoaderModule.forRoot({
+        animation: 'progress-dark',
+        theme: {
+          extendsFromRoot: true,
+          backgroundColor: 'var(--mat-option-hover-state-layer-color)',
+          height: '',
+        },
+      }),
+    ),
   ],
 };

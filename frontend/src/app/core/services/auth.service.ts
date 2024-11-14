@@ -18,7 +18,10 @@ interface UserToken extends Partial<User> {
 export class AuthService {
   private helper;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {
     this.helper = new JwtHelperService();
   }
 
@@ -31,7 +34,9 @@ export class AuthService {
   public login(identifier: string, password: string) {
     console.log('Login function called.');
     return this.http
-      .post<{ access_token: string }>('/login', { identifier, password })
+      .post<{
+        access_token: string;
+      }>('/login', { identifier, password, context: new HttpContext().set(AUTHENTICATED, false) })
       .pipe(tap((res) => this.setSession(res)));
   }
 

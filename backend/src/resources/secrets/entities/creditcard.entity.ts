@@ -13,10 +13,10 @@ export class Creditcard {
   type: CreditcardType;
 
   @Column()
-  number: number;
+  number: string;
 
   @Column()
-  cvv: number;
+  cvv: string;
 
   @Column()
   expiryDate: Date;

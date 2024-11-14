@@ -2,7 +2,7 @@ import { Column } from 'typeorm';
 
 export class Login {
   @Column({ nullable: true })
-  website: string;
+  website?: string;
 
   @Column()
   identifier: string;

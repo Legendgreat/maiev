@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ISecret } from '../interfaces/secret.interface';
 import { MatIcon } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import SecretEnum from '../util/SecretEnums';
 
 @Component({
   selector: 'app-secret',
@@ -16,6 +17,7 @@ export class SecretComponent {
   @Input() secret!: ISecret;
 
   private _snackBar = inject(MatSnackBar);
+  public SecretEnum = SecretEnum;
 
   pointerDownHandler() {
     console.log();
@@ -26,8 +28,10 @@ export class SecretComponent {
   }
 
   copyToClipboard() {
-    navigator.clipboard.writeText(this.secret.secret);
-    this.openSnackBar('Secret copied to clipboard.');
+    if (this.secret.type === SecretEnum.LOGIN) {
+      navigator.clipboard.writeText(this.secret.data.password);
+      this.openSnackBar('Secret copied to clipboard.');
+    }
   }
 
   openSnackBar(message: string) {
