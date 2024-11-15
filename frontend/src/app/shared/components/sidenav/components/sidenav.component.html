@@ -1,5 +1,5 @@
 <mat-sidenav-container class="h-full">
-  <mat-sidenav [opened]="isOpened()" [mode]="'side'">
+  <mat-sidenav [opened]="isOpen()" [mode]="'side'">
     <div class="flex flex-col h-full">
       <app-sidenav-list [list]="headerList" />
       <app-sidenav-list [list]="bodyList" class="grow" />

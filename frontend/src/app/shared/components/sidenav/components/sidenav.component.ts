@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SidenavService } from '../services/sidenav.service';
 import { SidenavListComponent } from './sidenavList/sidenavList.component';
@@ -16,7 +16,7 @@ export class SidenavComponent {
   constructor(
     private sidenavService: SidenavService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   headerList: ISidenavListItem[] = [
@@ -37,7 +37,5 @@ export class SidenavComponent {
     },
   ];
 
-  isOpened() {
-    return this.sidenavService.open;
-  }
+  isOpen = computed(() => this.sidenavService.open());
 }

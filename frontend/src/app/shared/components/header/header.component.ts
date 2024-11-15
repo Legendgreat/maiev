@@ -18,6 +18,10 @@ export class HeaderComponent {
     private secretService: SecretService,
   ) {}
 
+  getSidenavOpen() {
+    return this.sidenavService.open;
+  }
+
   handleMenuClick($event: MouseEvent) {
     $event.preventDefault();
     this.sidenavService.toggleSidenav();
