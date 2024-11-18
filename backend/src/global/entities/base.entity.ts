@@ -14,3 +14,8 @@ export class Base {
   @UpdateDateColumn()
   updated!: Date;
 }
+
+export class UUID {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+}

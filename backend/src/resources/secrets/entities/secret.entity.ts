@@ -1,9 +1,13 @@
 import { Base } from 'src/global/entities/base.entity';
-import { Group } from 'src/resources/groups/entities/group.entity';
-import { User } from 'src/resources/users/entities/user.entity';
-import { Column, DeleteDateColumn, Entity, ManyToOne } from 'typeorm';
-import { Creditcard } from './creditcard.entity';
-import { Login } from './login.entity';
+import {
+  Column,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+} from 'typeorm';
+import { SecretData } from './secret-data.entity';
+import { SecretOwner } from './secret-owner.entity';
 
 export enum SecretType {
   Login = 'login',
@@ -24,14 +28,12 @@ export class Secret extends Base {
   @Column()
   type: SecretType;
 
-  @Column('json')
-  data: string;
+  @OneToOne(() => SecretData, (data) => data.secret)
+  @JoinColumn()
+  data: SecretData;
 
-  @ManyToOne(() => User, (user) => user.secrets, { nullable: true })
-  user?: User;
-
-  @ManyToOne(() => Group, (group) => group.secrets, { nullable: true })
-  group?: Group;
+  @OneToOne(() => SecretOwner, (owner) => owner.secret)
+  owner: SecretOwner;
 
   @DeleteDateColumn({ nullable: true })
   deletedAt?: Date;

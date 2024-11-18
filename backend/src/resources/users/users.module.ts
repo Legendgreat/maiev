@@ -4,6 +4,7 @@ import { User } from './entities/user.entity';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { UserToGroup } from '../user-to-group/user-to-group.entity';
+import { SecretOwner } from '../secrets/entities/secret-owner.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User, UserToGroup])],

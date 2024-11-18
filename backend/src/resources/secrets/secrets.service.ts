@@ -24,8 +24,8 @@ export class SecretsService {
     const { user } = this.request;
 
     const secrets = this.secretRepository.find({
-      relations: { user: true },
-      where: { user },
+      relations: { owner: true },
+      where: { owner: { user } },
     });
 
     return secrets;

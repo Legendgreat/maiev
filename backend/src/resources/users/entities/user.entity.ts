@@ -1,5 +1,6 @@
 import { Base } from 'src/global/entities/base.entity';
 import { Role } from 'src/guards/roles/role.enum';
+import { SecretOwner } from 'src/resources/secrets/entities/secret-owner.entity';
 import { Secret } from 'src/resources/secrets/entities/secret.entity';
 import { UserToGroup } from 'src/resources/user-to-group/user-to-group.entity';
 import { Column, Entity, JoinColumn, OneToMany } from 'typeorm';
@@ -27,7 +28,7 @@ export class User extends Base {
   @Column()
   password: string;
 
-  @OneToMany(() => Secret, (secret) => secret.user, {
+  @OneToMany(() => SecretOwner, (secret) => secret.user, {
     cascade: true,
     nullable: true,
   })
