@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,6 +16,7 @@ import { MatStepperModule } from '@angular/material/stepper';
   selector: 'app-new-secret',
   standalone: true,
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     MatFormFieldModule,
     MatInputModule,
@@ -28,4 +34,5 @@ export class CreateSecretDialogComponent {
   constructor(private dialogRef: MatDialogRef<CreateSecretDialogComponent>) {}
 
   firstFormGroup: FormGroup = this._formBuilder.group({ firstCtrl: [''] });
+  secondFormGroup: FormGroup = this._formBuilder.group({ secondCtrl: [''] });
 }
