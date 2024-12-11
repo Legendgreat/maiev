@@ -3,7 +3,7 @@ import { inject, Injectable, isDevMode } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { ISecret } from '../interfaces/secret.interface';
 import { LoggingService } from '../../../core/services/logging.service';
-import { CreateSecretDialogComponent } from '../create-secret-dialog/create-secret-dialog.component';
+import { CreateSecretDialogComponent } from '../create-secret-dialog/components/create-secret-dialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Injectable({

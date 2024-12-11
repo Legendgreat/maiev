@@ -9,24 +9,28 @@ interface ISecretBase {
   updated?: Date;
 }
 
+export type CreditcardData = {
+  cardholder?: string;
+  type: CreditcardType;
+  number: string;
+  ccv: string;
+  expiryDate: Date;
+};
+
+export type CredentialData = {
+  website?: string;
+  identifier: string;
+  password: string;
+};
+
 interface ISecretCreditcard extends ISecretBase {
   type: SecretEnums.CREDITCARD;
-  data: {
-    cardholder?: string;
-    type: CreditcardType;
-    number: string;
-    ccv: string;
-    expiryDate: Date;
-  };
+  data: CreditcardData;
 }
 
 interface ISecretLogin extends ISecretBase {
   type: SecretEnums.LOGIN;
-  data: {
-    website?: string;
-    identifier: string;
-    password: string;
-  };
+  data: CredentialData;
 }
 
 export type ISecret = ISecretCreditcard | ISecretLogin;
